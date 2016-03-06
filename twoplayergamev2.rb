@@ -1,3 +1,5 @@
+#Question class
+# Random numbers generated, question created, confirm answer
 class Question
   attr_accessor(:answer)
 
@@ -18,6 +20,8 @@ class Question
   end
 end
 
+# Player class
+# Win/Lose methods, new users
 class Player
   attr_accessor(:lives, :points, :name)
 
@@ -36,8 +40,8 @@ class Player
   end
 end
 
+#Turns, Player1 turn 0,  player2 turn 1
 @turn = 0
-@game = true
 
 def turn
   @turn += 1
@@ -56,10 +60,11 @@ p "Welcome #{p1.name} & #{p2.name}, lets get started."
 puts
 
 
-
+#If player live are greater than 0 game will (contnue to)run
 while p1.lives > 0 && p2.lives > 0
   question = Question.new
 
+  #determine curretn player
   case @turn
   when 0
     p "#{p1.name} it's your turn!"
@@ -69,10 +74,14 @@ while p1.lives > 0 && p2.lives > 0
     puts
   end
 
+  #Pose question to current plyer
   p question.problem
 
+  #get answer
   input = gets.chomp.to_i
 
+
+  #answer analysis & output
   if @turn == 0 && question.is_correct?(input)
     p "Correct!"
     p1.win
@@ -100,6 +109,7 @@ while p1.lives > 0 && p2.lives > 0
   end
 end
 
+# Game Over output
 if p1.lives > 0
   p "#{p1.name} WINS!"
   p "Game Over! The Final score is #{p1.name}: #{p1.points} #{p2.name}: #{p2.points}"
